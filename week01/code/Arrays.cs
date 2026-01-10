@@ -8,13 +8,20 @@ public static class Arrays
     /// <returns>array of doubles that are the multiples of the supplied number</returns>
     public static double[] MultiplesOf(double number, int length)
     {
-        // TODO Problem 1 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
-
-        return []; // replace this return statement with your own
+        //Solution- Plan
+        //1.We first create  an array of size 'length' to store the multiples, this creates an array of the required size
+        double[] result = new double[length];
+        //2. and then we loop from 0 to length-1 to calculate each multiple
+        for (int i = 0; i < length; i++)
+        {
+            // 3. multiply the 'number' by (i + 1) to get the i-th multiple 
+            result[i] = number * (i + 1);
+        }
+        ////4. return the filled array containing all the multiples
+        return result;
     }
+
+   
 
     /// <summary>
     /// Rotate the 'data' to the right by the 'amount'.  For example, if the data is 
@@ -25,9 +32,27 @@ public static class Arrays
     /// </summary>
     public static void RotateListRight(List<int> data, int amount)
     {
-        // TODO Problem 2 Start
-        // Remember: Using comments in your program, write down your process for solving this problem
-        // step by step before you write the code. The plan should be clear enough that it could
-        // be implemented by another person.
-    }
+        // Solution 2:Plan
+        //1.The list length may be equal to the rotation amount,
+        // so we need to normalize the amount to avoid unnecessary full rotations.
+        amount = amount % data.Count;
+
+        // 2. If the rotation amount is 0 after normalization,
+        // there is nothing to rotate, so we can exit early.
+        if (amount == 0)
+            return;
+
+        //3. Identify the starting index of the elements that will move
+        // to the front of the list. These are the last 'amount' elements.
+        int splitIndex = data.Count - amount;
+
+        //4.copy the last 'amount' elements into a temporay list
+        List<int> tail = data.GetRange(splitIndex, amount);
+
+        //5. Remove copied elements from their original positions
+         data.RemoveRange(splitIndex, amount);
+
+        // 6. Insert the saved elements at the beginning of the list
+            data.InsertRange(0, tail);
+}
 }
