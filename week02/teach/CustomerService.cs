@@ -1,9 +1,12 @@
-﻿/// <summary>
+﻿using System.Diagnostics.CodeAnalysis;
+
+/// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
 /// </summary>
 public class CustomerService {
-    public static void Run() {
+    public static void Run()
+    {
         // Example code to see what's in the customer service queue:
         // var cs = new CustomerService(10);
         // Console.WriteLine(cs);
@@ -11,24 +14,51 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: -can I add 1customer to the queue and serve them: 
+        // Expected Result: display added customer  
         Console.WriteLine("Test 1");
+        var cs = new CustomerService(5);
+        cs.AddNewCustomer();
+        cs.ServeCustomer();
+        Console.WriteLine(cs);
 
-        // Defect(s) Found: 
+
+        // Defect(s) Found: Program should save customer before serving them
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: add 2 customers and serve them in order 
+        // Expected Result: display customers in the order they were added
         Console.WriteLine("Test 2");
+        cs = new CustomerService(5);
+        cs.AddNewCustomer();
+        cs.AddNewCustomer();
+        Console.WriteLine($"Before srving customers {cs}");
+        cs.ServeCustomer();
+        cs.ServeCustomer();
+        Console.WriteLine($"After Serving customers: {cs}");
 
-        // Defect(s) Found: 
+        // Defect(s) Found: none
 
         Console.WriteLine("=================");
 
-        // Add more Test Cases As Needed Below
+
+        //Test 3
+        //Scenario: can I erve customers if there is no one
+        //Expected result: Diplay error 
+        Console.WriteLine("Test 3");
+        cs = new CustomerService(5);
+        cs.ServeCustomer();
+
+        //Defects found: This found that I need to check the length in serve_customer and display an error message
+        
+    }
+
+
+    private void AddNewCustomer(object kerry)
+    {
+        throw new NotImplementedException();
     }
 
     private readonly List<Customer> _queue = new();
